@@ -8,6 +8,7 @@ from aiogram.fsm.state import State, StatesGroup
 from aiogram.fsm.context import FSMContext
 from PIL import Image
 from io import BytesIO
+from models.neural_processor import AnimeGANProcessor
 
 router = Router()
 
@@ -16,6 +17,15 @@ class PhotoState(StatesGroup):
     waiting_for_photo = State()
 
 PhotoMessage = Annotated[Message, F.photo]
+
+gan_processor = AnimeGANProcessor({
+    "hosoda": "checkpoints/hosoda_mamoru.pth",
+    "kon": "checkpoints/kon_satoshi.pth",
+    "miyazaki": "checkpoints/miyazaki_hayao.pth",
+    "shinkai": "checkpoints/shinkai_makoto.pth"
+})
+
+style_choice = {}
 
 
 
@@ -35,15 +45,15 @@ async def handle_photo(message: PhotoMessage, state: FSMContext):
 
 @router.message(F.photo, PhotoState.waiting_for_photo)
 async def handle_photo_upload(message: Message, state: FSMContext):
+        await message.answer("Processing...")
         picture = message.photo[-1]
         file = await message.bot.get_file(picture.file_id)
         file_path = file.file_path
-
         photo_bytes = await message.bot.download_file(file_path)
         image = Image.open(BytesIO(photo_bytes.read()))
 
         image = image.convert("RGB")
-        image = image.resize((800, 800))
+        # image = image.resize((800, 800))
 
         output_buffer = BytesIO()
         image.save(output_buffer, format="JPEG")
@@ -54,7 +64,7 @@ async def handle_photo_upload(message: Message, state: FSMContext):
                 file=output_buffer.read(),
                 filename="restyled.jpg"
             ),
-            caption="Your image style has been changed!",
+            caption="Here is your image!",
         )
 
         
