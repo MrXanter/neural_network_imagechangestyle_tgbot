@@ -1,8 +1,7 @@
 from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardMarkup, InlineKeyboardButton
 
 buttons = ReplyKeyboardMarkup(keyboard=[
-    [KeyboardButton(text="send the image")],
-    [KeyboardButton(text="help")]
+    [KeyboardButton(text="send the image")]
     ], resize_keyboard=True, input_field_placeholder="Choose the image")
 
 back_button = ReplyKeyboardMarkup(keyboard=[
