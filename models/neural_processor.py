@@ -1,7 +1,7 @@
 import torch
 from torchvision import transforms
 from PIL import Image
-from Transformer import Generator
+from models.Transformer import Transformer
 
 class AnimeGANProcessor:
     def __init__(self, model_paths: dict):
@@ -9,7 +9,7 @@ class AnimeGANProcessor:
         self.models = {}
 
         for style_name, pth_path in model_paths.items():
-            model = Generator().to(self.device)
+            model = Transformer().to(self.device)
             model.load_state_dict(torch.load(pth_path, map_location=self.device))
             model.eval()
             self.models[style_name] = model
