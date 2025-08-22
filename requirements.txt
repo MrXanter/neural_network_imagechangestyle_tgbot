@@ -2,3 +2,5 @@ aiogram==3.0.0b7
 python-dotenv==1.0.0
 Pillow
 torch
+torchvision
+numpy
