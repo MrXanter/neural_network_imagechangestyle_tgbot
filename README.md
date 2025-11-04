@@ -25,7 +25,7 @@ neural_network_imagechangestyle_tgbot/
 └── tg_bot_start.py     # Bot initialization and startup
 ```
 
-## Setup (Usual way)
+
 
 1. Clone:
 ```
@@ -33,6 +33,23 @@ neural_network_imagechangestyle_tgbot/
 ```
 
 2. Install dependencies:
+
+Intiate virtual environment:
+```bash
+python -m venv .venv
+```
+
+Activate virtual environment for Linux:
+```
+source .venv/bin/activate
+```
+
+Activate virtual environment for Windows:
+```
+.venv/bin/activate
+```
+
+Install required packages:
 ```bash
 pip install -r requirements.txt
 ```
@@ -71,6 +88,8 @@ Then, create docker image:
 ```
 docker build . -t telegram_bot
 ```
+When creating a container, mention a BOT_TOKEN environment variable with your telegram API token.
+
 
 ## How It Works
 
