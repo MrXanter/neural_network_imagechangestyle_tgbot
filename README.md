@@ -13,39 +13,63 @@ A Telegram bot that transforms photos into different anime art styles using GAN 
 ## Project Structure
 
 ```
-tg_image_restyler_bot/
+neural_network_imagechangestyle_tgbot/
 ├── bot/
 │   ├── handlers.py      # Telegram bot command & message handlers
 │   └── keyboard.py      # Telegram bot keyboard layouts
 ├── models/
 │   ├── Transformer.py   # Neural network architecture
-│   └── test.py         # Image processing and model handling
+│   └── test.py          # Image processing and model handling
 ├── .env                # Environment variables (bot token)
 ├── requirements.txt    # Project dependencies
-└── tg_bot_start.py    # Bot initialization and startup
+└── tg_bot_start.py     # Bot initialization and startup
 ```
 
-## Setup
+## Setup (Usual way)
 
-1. Install dependencies:
+1. Clone:
+```
+ git clone https://github.com/MrXanter/neural_network_imagechangestyle_tgbot
+```
+
+2. Install dependencies:
 ```bash
 pip install -r requirements.txt
 ```
 
-2. Create a `.env` file with your Telegram bot token:
+3. Create a `.env` file with your Telegram bot token:
 ```
 BOT_TOKEN=your_bot_token_here
 ```
 
-3. Place model files in the `models/` directory:
-- `hosoda_mamoru.pth`
-- `kon_satoshi.pth`
-- `miyazaki_hayao.pth`
-- `shinkai_makoto.pth`
-
 4. Run the bot:
 ```bash
 python tg_bot_start.py
+```
+
+## Docker (Linux/amd64)
+```
+docker pull mrxanter/telegram_bot:latest
+```
+When creating a container, mention a BOT_TOKEN environment variable with your telegram API token.
+
+
+Or Run with the BOT_TOKEN environment variable:
+```
+docker run -e BOT_TOKEN=your_bot_token_here mrxanter/telegram_bot:latest
+```
+
+## Docker(Windows Users)
+```
+git clone https://github.com/MrXanter/neural_network_imagechangestyle_tgbot
+```
+Create .env file, write:
+```
+BOT_TOKEN=your_telegram_API_token_here
+```
+Then, create docker image:
+```
+docker build . -t telegram_bot
 ```
 
 ## How It Works
@@ -81,15 +105,6 @@ python tg_bot_start.py
 4. Send your photo
 5. Wait for the processed image
 6. Use `/back` to return to main menu
-
-## Requirements
-
-- Python 3.7+
-- aiogram 3.0.0b7
-- PyTorch
-- torchvision
-- Pillow
-- numpy
 
 ## Notes
 

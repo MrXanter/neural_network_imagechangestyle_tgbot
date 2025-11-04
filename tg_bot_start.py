@@ -8,6 +8,9 @@ load_dotenv()
 
 API_TOKEN = os.getenv("BOT_TOKEN")
 
+if not API_TOKEN:
+    raise SystemExit("Missing BOT_TOKEN in .env — set BOT_TOKEN=your_token")
+
 bot = Bot(token=API_TOKEN)
 dp = Dispatcher()
 
